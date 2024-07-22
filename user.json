@@ -1,0 +1,33 @@
+{
+    "id": 123456,
+    "name": "John",
+    "accountNumber": 12345,
+    "address": {
+        "addressLine1": "12",
+        "addressLine2": "New Castle",
+        "State": "New York" 
+    },
+    "bets": [
+       {
+        "month":"Jan",
+        "totalBets": 100,
+        "wins": "$250",
+        "loss": "$1000",
+        "totalBetAmount": "$1250"
+    },
+    {
+        "month":"Feb",
+        "totalBets": 90,
+        "wins": "$250",
+        "loss": "$1000",
+        "totalBetAmount": "$1250"
+    },
+    {
+        "month":"March",
+        "totalBets": 80,
+        "wins": "$250",
+        "loss": "$1000",
+        "totalBetAmount": "$1250"
+    }
+    ]
+}
