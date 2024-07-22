@@ -19,48 +19,97 @@ const generatePDF = async (jsonData) => {
         .join("");
 
     const content = `
-        <html>
-        <head>
-            <style>
-            body { font-family: Arial, sans-serif; }
-            header { text-align: center; margin-bottom: 20px; }
-            footer { text-align: center; position: fixed; bottom: 0; width: 100%; }
-            table { width: 100%; border-collapse: collapse; }
-            th, td { border: 1px solid black; padding: 8px; text-align: center; }
-            </style>
-        </head>
-        <body>
-            <header>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            body {
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                color: #333;
+                background-color: #f4f4f4;
+            }
+            header {
+                text-align: center;
+                margin-bottom: 20px;
+                background-color: #4CAF50;
+                color: white;
+                padding: 20px 0;
+            }
+            footer {
+                text-align: center;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px 0;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                background-color: white;
+                margin-bottom: 20px;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 12px;
+                text-align: center;
+            }
+            th {
+                background-color: #4CAF50;
+                color: white;
+            }
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+            tr:hover {
+                background-color: #ddd;
+            }
+            @media print {
+                body, header, footer, table {
+                    background-color: white;
+                    color: black;
+                }
+                header, footer {
+                    page-break-before: always;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
             <h1>${name}</h1>
             <p>${addressString}</p>
-            </header>
-            <table>
+        </header>
+        <table>
             <thead>
                 <tr>
-                <th>Month</th>
-                <th>Total Bets</th>
-                <th>Wins</th>
-                <th>Loss</th>
-                <th>Total Bet Amount</th>
+                    <th>Month</th>
+                    <th>Total Bets</th>
+                    <th>Wins</th>
+                    <th>Loss</th>
+                    <th>Total Bet Amount</th>
                 </tr>
             </thead>
             <tbody>
                 ${tableRows}
             </tbody>
-            </table>
-            <footer>
+        </table>
+        <footer>
             <p>Page <span class="pageNumber"></span></p>
-            </footer>
-            <script>
+        </footer>
+        <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const pageNumbers = document.querySelectorAll('.pageNumber');
                 pageNumbers.forEach((pageNumber, index) => {
-                pageNumber.textContent = index + 1;
+                    pageNumber.textContent = index + 1;
                 });
             });
-            </script>
-        </body>
-        </html>
+        </script>
+    </body>
+    </html>    
     `;
 
     await page.setContent(content);
